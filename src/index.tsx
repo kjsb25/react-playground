@@ -5,11 +5,18 @@ import Home from './components/home/Home';
 import Movies from './components/movies/Movies';
 import reportWebVitals from './reportWebVitals';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  createHashRouter,
+  HashRouter,
+  Route,
+  RouterProvider,
+  Routes,
+} from 'react-router-dom';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
-    path: '/',
+    path: '/*',
     element: <Home />,
   },
   {
@@ -23,6 +30,12 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
+    {/* <HashRouter basename="/">
+      <Routes>
+        <Route path="/" Component={Home} />
+        <Route path="/movies" Component={Movies} />
+      </Routes>
+    </HashRouter> */}
     <RouterProvider router={router} />
   </React.StrictMode>
 );

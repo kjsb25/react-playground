@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Image } from 'react-bootstrap';
 
 function Collapsable() {
   const [isCollapsed, setCollapse] = useState(false);
@@ -14,10 +14,11 @@ function Collapsable() {
         Collapse
       </Button>
       <br />
-      <img
+      <Image
         className={`${isCollapsed ? 'collapse' : ''}`}
-        src="/img/ln.svg"
-      ></img>
+        src="./img/LoremIpsum.png"
+        width="100"
+      ></Image>
     </div>
   );
 }

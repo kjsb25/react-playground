@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Links() {
-  return <a href="/movies">Movies</a>;
+  return <Link to="/movies">Movies</Link>;
+  // return <a href="/#/movies">Movies</a>;
 }
 
 export default Links;

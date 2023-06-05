@@ -1,7 +1,7 @@
 {
   "name": "playground-kjs",
   "version": "0.1.0",
-  "homepage": "https://keenanshumard.com/react-playground",
+  "homepage": "https://keenanshumard.com/react-playground/#",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",

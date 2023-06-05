@@ -26,11 +26,6 @@ function Home() {
               </Col>
             ))}
           </Row>
-          <Card>test</Card>
-          <Card>test</Card>
-          <Card>test</Card>
-          <Card>test</Card>
-          <Card>test</Card>
         </Container>
       </CardGroup>
     </div>
