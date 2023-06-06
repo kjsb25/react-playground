@@ -5,14 +5,7 @@ import Home from './components/home/Home';
 import Movies from './components/movies/Movies';
 import reportWebVitals from './reportWebVitals';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import {
-  createBrowserRouter,
-  createHashRouter,
-  HashRouter,
-  Route,
-  RouterProvider,
-  Routes,
-} from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 
 const router = createHashRouter([
   {
@@ -30,12 +23,6 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    {/* <HashRouter basename="/">
-      <Routes>
-        <Route path="/" Component={Home} />
-        <Route path="/movies" Component={Movies} />
-      </Routes>
-    </HashRouter> */}
     <RouterProvider router={router} />
   </React.StrictMode>
 );

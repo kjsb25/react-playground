@@ -4,7 +4,7 @@ import Counter from './Counter';
 import Collapsable from './Collapsable';
 import Links from './Links';
 import AppCard from './AppCard';
-import { Card, CardGroup, Col, Container, Row } from 'react-bootstrap';
+import { CardGroup, Col, Container, Row } from 'react-bootstrap';
 
 type CardType = { title: string; component: React.ReactNode };
 
@@ -16,7 +16,8 @@ const cards: Array<CardType> = [
 
 function Home() {
   return (
-    <div className="Home">
+    <Container className="Home">
+      <h1>React Practice</h1>
       <CardGroup>
         <Container fluid>
           <Row>
@@ -28,7 +29,7 @@ function Home() {
           </Row>
         </Container>
       </CardGroup>
-    </div>
+    </Container>
   );
 }
 

@@ -4,6 +4,7 @@ import { FormEventHandler } from 'react';
 import { Col, FloatingLabel, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import styles from './SearchForm.module.css';
 
 type Props = {
   onSubmit: FormEventHandler<HTMLFormElement>;
@@ -22,8 +23,13 @@ function SearchForm(props: Props) {
             />
           </FloatingLabel>
         </Form.Group>
-        <Form.Group as={Col} controlId="submitButton" xs={1}>
-          <Button variant="outline-primary" size="lg" type="submit">
+        <Form.Group
+          as={Col}
+          controlId="submitButton"
+          xs={1}
+          className={styles.buttonContainer}
+        >
+          <Button variant="outline-dark" size="lg" type="submit">
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </Button>
         </Form.Group>

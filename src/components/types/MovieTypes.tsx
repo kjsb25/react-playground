@@ -9,6 +9,7 @@ export enum movieActions {
   SEARCH,
 }
 
-export type basicSearch = {
-  searchString?: string;
+export type movieSearchParams = {
+  s: string;
+  page?: string;
 };

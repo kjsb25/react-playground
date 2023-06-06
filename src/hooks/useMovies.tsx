@@ -1,40 +1,43 @@
-import { useState, useEffect, useReducer } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { movieActions, basicSearch } from '../components/types/MovieTypes';
+import { movieSearchParams } from '../components/types/MovieTypes';
 
 const baseURL = 'https://www.omdbapi.com/';
 
-const params = {
-  s: 'transformers',
+let params = {
+  s: '',
+  page: '',
   apiKey: process.env.REACT_APP_OMDB_API_KEY || '',
 };
 
-export default function useMovies(props: basicSearch) {
+export default function useMovies(props: movieSearchParams) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [movies, setMovies] = useState([]);
 
-  //   const reducer = (state, action) => {
-  //       switch
-  //   };
-
-  //   const [state, dispatch] = useReducer(reducer, props);
-
   useEffect(() => {
+    setIsLoading(true);
     let url: string = baseURL;
-    if (props.searchString) {
-      params.s = props.searchString;
-    }
+    params = { ...params, ...props };
     const searchParams = new URLSearchParams(params);
     url = url.concat('?', searchParams.toString());
-    console.log(url);
     axios
       .get(url)
       .then((response) => {
-        setMovies(response.data.Search);
+        if (response.data.Response === 'True') {
+          setMovies(response.data.Search);
+          setIsError(false);
+        } else {
+          setIsError(true);
+        }
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setIsLoading(false);
+        setIsError(true);
       });
-  }, [props.searchString]);
+  }, [props]);
 
-  return movies;
+  return { isLoading, isError, movies };
 }
