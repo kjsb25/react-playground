@@ -4,15 +4,21 @@ import { Category } from '../components/types/JeopardyTypes';
 
 const baseURL = 'https://jservice.io/api/categories';
 
-const params = { count: '5' };
+const HIGHEST_CAT_ID = 20000;
+
+const CAT_COUNT = 5;
+
+const params = { count: CAT_COUNT.toString(), offset: '0' };
 
 export default function useJCategories() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [shouldRefetch, refetch] = useState({});
 
   useEffect(() => {
     setIsLoading(true);
+    params.offset = Math.floor(Math.random() * HIGHEST_CAT_ID).toString();
     let url: string = baseURL;
     const searchParams = new URLSearchParams(params);
     url = url.concat('?', searchParams.toString());
@@ -28,7 +34,7 @@ export default function useJCategories() {
         setIsLoading(false);
         setIsError(true);
       });
-  }, []);
+  }, [shouldRefetch]);
 
-  return { isLoading, isError, categories };
+  return { isLoading, isError, categories, refetch };
 }
