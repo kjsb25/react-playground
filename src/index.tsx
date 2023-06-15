@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import Home from './components/home/Home';
 import Movies from './components/movies/Movies';
+import JeopardyBoard from './components/jeopardy/JeopardyBoard';
+
 import reportWebVitals from './reportWebVitals';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
@@ -15,6 +17,10 @@ const router = createHashRouter([
   {
     path: '/movies',
     element: <Movies />,
+  },
+  {
+    path: '/jeopardy',
+    element: <JeopardyBoard />,
   },
 ]);
 
