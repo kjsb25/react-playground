@@ -1,20 +1,12 @@
-import React from 'react';
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Nav,
-  Navbar,
-  NavDropdown,
-  Row,
-} from 'react-bootstrap';
+import { Container, Nav, Navbar, NavDropdown, Row } from 'react-bootstrap';
 import useJCategories from '../../hooks/useJCategories';
+import useJQuestions from '../../hooks/useJQuestions';
 import BoardCard from './BoardCard';
+import styles from './css/JeopardyBoard.module.css';
 
 function JeopardyBoard() {
   const { categories, refetch } = useJCategories();
-  // const { questions } = useJQuestions(categories);
+  const { questions } = useJQuestions(categories);
 
   function refreshBoard() {
     refetch({});
@@ -37,18 +29,23 @@ function JeopardyBoard() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Container fluid>
+      <Container fluid className={styles.boardContainer}>
         <Row>
           {categories.map((category) => {
-            return (
-              <Col key={category.id}>
-                <Card className="text-center">
-                  <Card.Body>{category.title} </Card.Body>
-                </Card>
-              </Col>
-            );
+            return <BoardCard key={category.id} category={category} />;
           })}
         </Row>
+        {questions.map((questionRow, index) => {
+          return (
+            <Row key={index}>
+              {questionRow.map((question) => {
+                return (
+                  <BoardCard key={question.question} question={question} />
+                );
+              })}
+            </Row>
+          );
+        })}
       </Container>
     </div>
   );

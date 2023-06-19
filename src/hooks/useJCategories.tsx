@@ -25,7 +25,7 @@ export default function useJCategories() {
     axios
       .get(url)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setCategories(response.data);
         setIsError(false);
       })
