@@ -13,7 +13,7 @@ function JeopardyBoard() {
   }
 
   return (
-    <div className="JeopardyBoard">
+    <>
       <Navbar bg="light" expand="lg">
         <Container>
           <Navbar.Brand>Jeopardy</Navbar.Brand>
@@ -29,15 +29,15 @@ function JeopardyBoard() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Container fluid className={styles.boardContainer}>
-        <Row>
+      <Container className={styles.boardContainer}>
+        <Row className={styles.boardRow}>
           {categories.map((category) => {
             return <BoardCard key={category.id} category={category} />;
           })}
         </Row>
         {questions.map((questionRow, index) => {
           return (
-            <Row key={index}>
+            <Row key={index} className={styles.boardRow}>
               {questionRow.map((question) => {
                 return (
                   <BoardCard key={question.question} question={question} />
@@ -47,7 +47,7 @@ function JeopardyBoard() {
           );
         })}
       </Container>
-    </div>
+    </>
   );
 }
 

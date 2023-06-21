@@ -1,6 +1,26 @@
-.card {
-  color: gold;
-  background-color: red;
-  height: 150px;
-  width: 150px;
+div.card {
+  background-color: rgb(40, 40, 215);
+  align-self: center;
+  height: 125px;
+}
+
+div.screen {
+  /* padding: 12px; */
+}
+
+div.catTitle {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+div.value {
+  color: rgb(247, 204, 156);
+  font-size: 52px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

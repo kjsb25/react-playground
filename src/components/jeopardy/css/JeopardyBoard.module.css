@@ -1,3 +1,9 @@
+.boardRow {
+  padding-bottom: 12px;
+}
+
 .boardContainer {
-  width: 50%;
+  background-color: black;
+  width: 40%;
+  padding: 16px;
 }
