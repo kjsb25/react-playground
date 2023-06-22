@@ -1,15 +1,18 @@
-import { Container, Nav, Navbar, NavDropdown, Row } from 'react-bootstrap';
+import { useState } from 'react';
+import { Container, Nav, Navbar, NavDropdown, Spinner } from 'react-bootstrap';
 import useJCategories from '../../hooks/useJCategories';
-import useJQuestions from '../../hooks/useJQuestions';
-import BoardCard from './BoardCard';
-import styles from './css/JeopardyBoard.module.css';
+import Board from './Board';
 
 function JeopardyBoard() {
-  const { categories, refetch } = useJCategories();
-  const { questions } = useJQuestions(categories);
+  const { categories, refetch, isLoading } = useJCategories();
+  const [score, setScore] = useState(0);
 
   function refreshBoard() {
     refetch({});
+  }
+
+  function updateScore(add: number) {
+    setScore(score + add);
   }
 
   return (
@@ -29,24 +32,11 @@ function JeopardyBoard() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Container className={styles.boardContainer}>
-        <Row className={styles.boardRow}>
-          {categories.map((category) => {
-            return <BoardCard key={category.id} category={category} />;
-          })}
-        </Row>
-        {questions.map((questionRow, index) => {
-          return (
-            <Row key={index} className={styles.boardRow}>
-              {questionRow.map((question) => {
-                return (
-                  <BoardCard key={question.question} question={question} />
-                );
-              })}
-            </Row>
-          );
-        })}
-      </Container>
+      <h2>Points: {score}</h2>
+      {isLoading && <Spinner></Spinner>}
+      {!isLoading && (
+        <Board categories={categories} updateScore={updateScore} />
+      )}
     </>
   );
 }

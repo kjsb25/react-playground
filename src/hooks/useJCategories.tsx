@@ -6,7 +6,7 @@ const baseURL = 'https://jservice.io/api/categories';
 
 const HIGHEST_CAT_ID = 20000;
 
-const CAT_COUNT = 5;
+const CAT_COUNT = 6;
 
 const params = { count: CAT_COUNT.toString(), offset: '0' };
 
@@ -25,8 +25,8 @@ export default function useJCategories() {
     axios
       .get(url)
       .then((response) => {
-        // console.log(response.data);
         setCategories(response.data);
+        setIsLoading(false);
         setIsError(false);
       })
       .catch((error) => {
