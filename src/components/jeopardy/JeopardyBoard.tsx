@@ -30,9 +30,13 @@ function JeopardyBoard() {
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
+          <Navbar.Collapse className="justify-content-end">
+            <Navbar.Text className="justify-content-end">
+              Score: {score}
+            </Navbar.Text>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
-      <h2>Points: {score}</h2>
       {isLoading && <Spinner></Spinner>}
       {!isLoading && (
         <Board categories={categories} updateScore={updateScore} />

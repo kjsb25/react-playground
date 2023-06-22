@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Card, Col, Form, Spinner } from 'react-bootstrap';
-import { Category, Question } from '../types/JeopardyTypes';
+import { Button, Card, CloseButton, Col, Form, Spinner } from 'react-bootstrap';
+import { Question } from '../types/JeopardyTypes';
 import { motion } from 'framer-motion';
 import styles from './css/BoardCard.module.css';
 import axios from 'axios';
@@ -8,7 +8,7 @@ import axios from 'axios';
 interface CardDetails {
   category_id: string;
   value: string;
-  addToScore: (points: number) => void;
+  reportResult: (correct: boolean, points: number, rightAnswer: string) => void;
 }
 
 const initialState: Question = {
@@ -45,9 +45,17 @@ function BoardCard(props: CardDetails) {
       answer: { value: string };
     };
     const answer = target.answer.value;
-    if (answer === question.answer) {
-      props.addToScore(Number.parseInt(question.value));
-    }
+
+    props.reportResult(
+      answer === question.answer,
+      Number.parseInt(question.value),
+      question.answer
+    );
+
+    setState(CardState.ANSWERED);
+  }
+
+  function errorRecover() {
     setState(CardState.ANSWERED);
   }
 
@@ -67,8 +75,12 @@ function BoardCard(props: CardDetails) {
       .get(url)
       .then((response) => {
         const returnLength = response.data.length;
-        const randomIndex = Math.floor(Math.random() * returnLength);
-        setQuestion(response.data[randomIndex]);
+        if (returnLength > 0) {
+          const randomIndex = Math.floor(Math.random() * returnLength);
+          setQuestion(response.data[randomIndex]);
+        } else {
+          setIsError(true);
+        }
         setIsLoading(false);
       })
       .catch((error) => {
@@ -101,13 +113,21 @@ function BoardCard(props: CardDetails) {
             )}
             {state === CardState.ANSWERING &&
               !isLoading &&
+              !isError &&
               question?.question && (
                 <Card.Body className={styles.value}>
                   {question?.question}
                 </Card.Body>
               )}
+            {state === CardState.ANSWERING && isError && (
+              <Card.Body className={styles.value}>
+                Error: Question could not be loaded.
+                <br></br>
+                <CloseButton onClick={errorRecover} />
+              </Card.Body>
+            )}
           </Card>
-          {state === CardState.ANSWERING && !isLoading && (
+          {state === CardState.ANSWERING && !isLoading && !isError && (
             <Form className={styles.answerForm} onSubmit={handleAnswerSubmit}>
               <Form.Control
                 size="lg"
