@@ -4,6 +4,11 @@
 
 .boardContainer {
   background-color: black;
-  width: 40%;
   padding: 16px;
+}
+
+.bodyContainer {
+  padding-top: 24px;
+  height: 100vh;
+  background-image: linear-gradient(to bottom right, blue, white);
 }

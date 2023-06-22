@@ -26,7 +26,12 @@ function Board(props: Props) {
     rightAnswer: string
   ) {
     setModalText(`What is ${rightAnswer}`);
-    isCorrect ? setShowSuccessAlert(true) : setShowFailureAlert(true);
+    if (isCorrect) {
+      props.updateScore(value);
+      setShowSuccessAlert(true);
+    } else {
+      setShowFailureAlert(true);
+    }
   }
 
   useEffect(() => {
@@ -37,11 +42,11 @@ function Board(props: Props) {
   }, [showSuccessAlert, showFailureAlert]);
 
   return (
-    <Container fluid>
+    <Container fluid className={styles.bodyContainer}>
       <Row>
         <Col xs={2}></Col>
         <Col xs={8}>
-          <Container className={styles.boardContainer}>
+          <div className={styles.boardContainer}>
             <Row className={styles.boardRow}>
               {props.categories.map((category) => {
                 return <CategoryCard key={category.id} category={category} />;
@@ -68,7 +73,7 @@ function Board(props: Props) {
                   </Row>
                 );
               })}
-          </Container>
+          </div>
         </Col>
         <Col xs={2}>
           <Alert

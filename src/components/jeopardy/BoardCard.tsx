@@ -135,6 +135,8 @@ function BoardCard(props: CardDetails) {
                 id="answer"
                 placeholder="Answer"
                 aria-describedby="answer"
+                autoFocus
+                autoComplete="off"
               />
               <Button variant="primary" type="submit">
                 Submit
