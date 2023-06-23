@@ -1,7 +1,16 @@
 import { useState } from 'react';
-import { Container, Nav, Navbar, NavDropdown, Spinner } from 'react-bootstrap';
+import {
+  Col,
+  Container,
+  Nav,
+  Navbar,
+  NavDropdown,
+  Row,
+  Spinner,
+} from 'react-bootstrap';
 import useJCategories from '../../hooks/useJCategories';
 import Board from './Board';
+import styles from './css/JeopardyBoard.module.css';
 
 function JeopardyBoard() {
   const { categories, refetch, isLoading } = useJCategories();
@@ -37,10 +46,23 @@ function JeopardyBoard() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {isLoading && <Spinner></Spinner>}
-      {!isLoading && (
-        <Board categories={categories} updateScore={updateScore} />
-      )}
+      <Container fluid className={styles.bodyContainer}>
+        {isLoading && (
+          <Row>
+            <Col xs={5}></Col>
+            <Col xs={2}>
+              <Spinner
+                className={styles.spinner}
+                style={{ width: '10rem', height: '10rem' }}
+              ></Spinner>
+            </Col>
+            <Col xs={5}></Col>
+          </Row>
+        )}
+        {!isLoading && (
+          <Board categories={categories} updateScore={updateScore} />
+        )}
+      </Container>
     </>
   );
 }

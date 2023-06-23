@@ -47,7 +47,7 @@ function BoardCard(props: CardDetails) {
     const answer = target.answer.value;
 
     props.reportResult(
-      answer === question.answer,
+      answer.toLowerCase() === question.answer.toLowerCase(),
       Number.parseInt(question.value),
       question.answer
     );

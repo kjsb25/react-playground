@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { Button, Card, Col, Container, Alert, Row } from 'react-bootstrap';
+import { Col, Container, Alert, Row } from 'react-bootstrap';
 import { Category } from '../types/JeopardyTypes';
 import BoardCard from './BoardCard';
 import CategoryCard from './CategoryCard';
@@ -42,61 +42,59 @@ function Board(props: Props) {
   }, [showSuccessAlert, showFailureAlert]);
 
   return (
-    <Container fluid className={styles.bodyContainer}>
-      <Row>
-        <Col xs={2}></Col>
-        <Col xs={8}>
-          <div className={styles.boardContainer}>
-            <Row className={styles.boardRow}>
-              {props.categories.map((category) => {
-                return <CategoryCard key={category.id} category={category} />;
-              })}
-            </Row>
-            {props.categories &&
-              [...Array(Values.length)].map((questionRow, rowIndex) => {
-                return (
-                  <Row key={rowIndex} className={styles.boardRow}>
-                    {[...Array(props.categories.length)].map(
-                      (questionItem, columnIndex) => {
-                        const category_id = props.categories[columnIndex].id;
-                        const value = Values[rowIndex].toString() || '200';
-                        return (
-                          <BoardCard
-                            key={rowIndex + columnIndex}
-                            category_id={category_id}
-                            value={value}
-                            reportResult={reportResult}
-                          />
-                        );
-                      }
-                    )}
-                  </Row>
-                );
-              })}
-          </div>
-        </Col>
-        <Col xs={2}>
-          <Alert
-            variant="success"
-            onClose={() => setShowSuccessAlert(false)}
-            dismissible
-            show={showSuccessAlert}
-          >
-            <Alert.Heading>Correct!</Alert.Heading>
-            {modalText}
-          </Alert>
-          <Alert
-            variant="danger"
-            onClose={() => setShowFailureAlert(false)}
-            dismissible
-            show={showFailureAlert}
-          >
-            <Alert.Heading>Incorrect!</Alert.Heading>
-            {modalText}
-          </Alert>
-        </Col>
-      </Row>
-    </Container>
+    <Row>
+      <Col xs={2}></Col>
+      <Col xs={8}>
+        <div className={styles.boardContainer}>
+          <Row className={styles.boardRow}>
+            {props.categories.map((category) => {
+              return <CategoryCard key={category.id} category={category} />;
+            })}
+          </Row>
+          {props.categories &&
+            [...Array(Values.length)].map((questionRow, rowIndex) => {
+              return (
+                <Row key={rowIndex} className={styles.boardRow}>
+                  {[...Array(props.categories.length)].map(
+                    (questionItem, columnIndex) => {
+                      const category_id = props.categories[columnIndex].id;
+                      const value = Values[rowIndex].toString() || '200';
+                      return (
+                        <BoardCard
+                          key={rowIndex + columnIndex}
+                          category_id={category_id}
+                          value={value}
+                          reportResult={reportResult}
+                        />
+                      );
+                    }
+                  )}
+                </Row>
+              );
+            })}
+        </div>
+      </Col>
+      <Col xs={2}>
+        <Alert
+          variant="success"
+          onClose={() => setShowSuccessAlert(false)}
+          dismissible
+          show={showSuccessAlert}
+        >
+          <Alert.Heading>Correct!</Alert.Heading>
+          {modalText}
+        </Alert>
+        <Alert
+          variant="danger"
+          onClose={() => setShowFailureAlert(false)}
+          dismissible
+          show={showFailureAlert}
+        >
+          <Alert.Heading>Incorrect!</Alert.Heading>
+          {modalText}
+        </Alert>
+      </Col>
+    </Row>
   );
 }
 

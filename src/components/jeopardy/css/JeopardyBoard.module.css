@@ -12,3 +12,9 @@
   height: 100vh;
   background-image: linear-gradient(to bottom right, blue, white);
 }
+
+.spinner {
+  height: 200px;
+  width: 200px;
+  margin-top: 200px;
+}
