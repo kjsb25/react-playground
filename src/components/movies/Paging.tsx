@@ -33,6 +33,8 @@ function Paging(props: Props) {
               {page}
             </Pagination.Item>
           );
+        } else {
+          return <></>;
         }
       })}
     </Pagination>

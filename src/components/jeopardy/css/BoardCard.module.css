@@ -1,0 +1,50 @@
+div.card {
+  background-color: rgb(40, 40, 215);
+  align-self: center;
+  height: 125px;
+  flex: 1;
+}
+
+div.expandedCard {
+  height: 100vh;
+  width: 100vh;
+}
+
+div.catTitle {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+div.value {
+  color: rgb(247, 204, 156);
+  font-size: 48px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+}
+
+form.answerForm {
+  position: fixed;
+  bottom: inherit;
+  padding-bottom: 10vh;
+  left: 40vw;
+  width: 20vw;
+  display: flex;
+  flex-direction: column;
+}
