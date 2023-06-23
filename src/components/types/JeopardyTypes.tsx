@@ -5,6 +5,14 @@ export type Question = {
   answer: string;
 };
 
+export type FinalQuestion = {
+  completed: boolean;
+  value: string;
+  question: string;
+  answer: string;
+  category: Category;
+};
+
 export type Category = {
   id: string;
   title: string;
@@ -21,3 +29,9 @@ export type Board = {
   categories: Array<Category>;
   questions: Array<Array<Question>>;
 };
+
+export enum GameType {
+  REGULAR,
+  DOUBLE,
+  FINAL,
+}

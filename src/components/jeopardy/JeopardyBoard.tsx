@@ -9,15 +9,27 @@ import {
   Spinner,
 } from 'react-bootstrap';
 import useJCategories from '../../hooks/useJCategories';
+import { GameType } from '../types/JeopardyTypes';
 import Board from './Board';
 import styles from './css/JeopardyBoard.module.css';
+import FinalJeopardy from './FinalJeopardy';
 
 function JeopardyBoard() {
   const { categories, refetch, isLoading } = useJCategories();
   const [score, setScore] = useState(0);
+  const [gameType, setGameType] = useState(GameType.REGULAR);
 
   function refreshBoard() {
     refetch({});
+  }
+
+  function double() {
+    setGameType(GameType.DOUBLE);
+    refreshBoard();
+  }
+
+  function final() {
+    setGameType(GameType.FINAL);
   }
 
   function updateScore(add: number) {
@@ -36,6 +48,12 @@ function JeopardyBoard() {
                 <NavDropdown.Item onClick={refreshBoard}>
                   New Board
                 </NavDropdown.Item>
+                <NavDropdown.Item onClick={double}>
+                  Double Jeopardy
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={final}>
+                  Final Jeopardy
+                </NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
@@ -47,7 +65,7 @@ function JeopardyBoard() {
         </Container>
       </Navbar>
       <Container fluid className={styles.bodyContainer}>
-        {isLoading && (
+        {gameType !== GameType.FINAL && isLoading && (
           <Row>
             <Col xs={5}></Col>
             <Col xs={2}>
@@ -59,9 +77,14 @@ function JeopardyBoard() {
             <Col xs={5}></Col>
           </Row>
         )}
-        {!isLoading && (
-          <Board categories={categories} updateScore={updateScore} />
+        {gameType !== GameType.FINAL && !isLoading && (
+          <Board
+            categories={categories}
+            gameType={gameType}
+            updateScore={updateScore}
+          />
         )}
+        {gameType === GameType.FINAL && <FinalJeopardy />}
       </Container>
     </>
   );

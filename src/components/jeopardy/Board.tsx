@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Col, Container, Alert, Row } from 'react-bootstrap';
-import { Category } from '../types/JeopardyTypes';
+import { Category, GameType } from '../types/JeopardyTypes';
 import BoardCard from './BoardCard';
 import CategoryCard from './CategoryCard';
 import styles from './css/JeopardyBoard.module.css';
@@ -9,6 +9,7 @@ import styles from './css/JeopardyBoard.module.css';
 interface Props {
   categories: Category[];
   updateScore: (scoreToAdd: number) => void;
+  gameType: GameType;
 }
 
 const Values = [200, 400, 600, 800, 1000];
@@ -58,12 +59,16 @@ function Board(props: Props) {
                   {[...Array(props.categories.length)].map(
                     (questionItem, columnIndex) => {
                       const category_id = props.categories[columnIndex].id;
-                      const value = Values[rowIndex].toString() || '200';
+                      let value = Values[rowIndex];
+                      if (props.gameType === GameType.DOUBLE) {
+                        value = value * 2;
+                      }
+                      let stringValue = value.toString();
                       return (
                         <BoardCard
                           key={rowIndex + columnIndex}
                           category_id={category_id}
-                          value={value}
+                          value={stringValue}
                           reportResult={reportResult}
                         />
                       );
